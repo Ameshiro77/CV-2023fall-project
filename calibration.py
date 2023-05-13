@@ -1,9 +1,17 @@
+"""
+This .py is to do:
+1. capture 
+2. calibrate camera (normal or fisheye) using photos captured
+3. undistort the image using K and D by calibrarion result 
+"""
+# ==========
 import cv2
 import numpy as np
 import glob
 from utils.drawing import drawCorners
 from utils.opFile import writeIntriToFile,cleanFolder
 import os
+# ==========
 
 """
 Board class: you need to preset the cols,rows and width of the board
@@ -84,7 +92,7 @@ def Calibrate(board_folder:str,board:Board,mode="normal",out_file:str="./configs
             return
         
         # show photo
-        drawCorners(img,board.COL, board.ROW,corners)
+        # drawCorners(img,board.COL, board.ROW,corners)
 
     if mode == "fisheye" :
         K = np.array(np.zeros((3, 3)))
@@ -93,7 +101,7 @@ def Calibrate(board_folder:str,board:Board,mode="normal",out_file:str="./configs
         rvecs = [np.zeros((1, 1, 3), dtype=np.float32) for i in range(len(imageSets))]
         tvecs = [np.zeros((1, 1, 3), dtype=np.float32) for i in range(len(imageSets))]
         ret, K, D, rvecs, tvecs = cv2.fisheye.calibrate(objPoints, imgPoints, (w,h), K, D, rvecs, tvecs,criteria=criteria)
-        print(K,D)
+        print("K:",K,"\ndistcoeff:",D)
         return K,D
 
     else:
@@ -116,8 +124,8 @@ def undistort(img,cameraMatrix , distCoeff, mode = "normal"): # correct the imag
         # undistort
         mapx, mapy = cv2.initUndistortRectifyMap(cameraMatrix,  distCoeff, None, cameraMatrix, (w,h), 5)
         dst = cv2.remap(img, mapx, mapy, cv2.INTER_LINEAR)
-        print(dst.shape)
-        cv2.imshow("img",cv2.resize(dst,(640,480)))
+        print("dst shape:",dst.shape)
+        cv2.imshow("img",dst)
         cv2.waitKey(0)  
         cv2.imwrite('calibresult.png', dst)
     
