@@ -77,13 +77,14 @@ def Calibrate(board_folder:str,board:Board,mode="normal",out_file:str="./configs
         _, corners = cv2.findChessboardCorners(gray, (board.COL, board.ROW), None)  # corner: N,1,2
         imgPoints.append(corners)   
 
+        print("objp:",objp,"\ncorners:",corners)
         #if no match 
         if len(objPoints[0]) != len(imgPoints[0]):
             print(f"no match in {frame}!")
             return
         
         # show photo
-        #drawCorners(gray,board.COL, board.ROW,corners)
+        drawCorners(img,board.COL, board.ROW,corners)
 
     if mode == "fisheye" :
         K = np.array(np.zeros((3, 3)))
@@ -114,7 +115,7 @@ def undistort(img,cameraMatrix , distCoeff): # correct the image
     h,  w = img.shape[:2]
 
     # we set alpha = 0 : reserve black pixels
-    newcameramtx, roi = cv2.getOptimalNewCameraMatrix(cameraMatrix, distCoeff, (w,h), 1, (w,h),centerPrincipalPoint=True)
+    newcameramtx, roi = cv2.getOptimalNewCameraMatrix(cameraMatrix, distCoeff, (w,h), 0, (w,h),centerPrincipalPoint=False)
     print('\nK,new_K,roi:\n','K:',cameraMatrix,'\nnew K:',newcameramtx,'\nroi:',roi)
 
     # undistort
@@ -133,15 +134,22 @@ if __name__ == '__main__':
     if selec == '1':
         # delete the formal photos
         cleanFolder("./caliImg")
+        print("former photos have been cleaned up.taking new photos.")
         cap = cv2.VideoCapture(0)
         Capture("./caliImg",5,cap)
     
     elif selec == '2':
-        board = Board(9,10,13) #col row width
-        cameraMatrix,distCoeff = Calibrate("Img",board,mode="normal",out_file="./configs/Intri.py") 
+        board = Board(11,8,1) #col row width(mm)
+        mode = input("choose your camera type: [1]normal [2]fisheye\n")
+        if mode == '1':
+            cameraMatrix,distCoeff = Calibrate("caliImg",board,mode="normal",out_file="./configs/Intri.py")
+        elif mode == '2':
+            cameraMatrix,distCoeff = Calibrate("caliImg",board,mode="fisheye",out_file="./configs/Intri.py")  
+        else:
+            print("error input.exit.")
 
     elif selec == '3':
-        img = cv2.imread("./Img/1.png")
+        img = cv2.imread("./caliImg/0.png")
         from configs.Intri import cameraMatrix,distCoeff
         undistort(img,cameraMatrix,distCoeff)
 

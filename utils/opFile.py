@@ -13,7 +13,7 @@ def writeIntriToFile(file_path,cmx,dist):
 
 # to remove files in a folder
 def cleanFolder(folder):
-    # delete the formal photos
+    # delete the former photos
     del_list = os.listdir(folder)
     for f in del_list:
         file_path = os.path.join(folder, f)
