@@ -94,13 +94,9 @@ def Calibrate(board_folder:str,board:Board,mode="normal",out_file:str="./configs
         tvecs = [np.zeros((1, 1, 3), dtype=np.float32) for i in range(len(imageSets))]
         ret, K, D, rvecs, tvecs = cv2.fisheye.calibrate(objPoints, imgPoints, (w,h), K, D, rvecs, tvecs,criteria=criteria)
         print(K,D)
-        img_undistorted = cv2.fisheye.undistortImage(gray, K, D)
-        cv2.imshow('Undistorted Image', img_undistorted)
-        cv2.waitKey(0)
         return K,D
 
     else:
-        # calibrate:
         _ , cameraMatrix , distCoeff, rvec , tvec = cv2.calibrateCamera(objPoints,imgPoints,(w,h),None,None)
         print("====results of calibration====")
         print("error:",_,"num of boards :",len(rvec),len(tvec))
@@ -111,20 +107,24 @@ def Calibrate(board_folder:str,board:Board,mode="normal",out_file:str="./configs
 """
 this function is to undistort
 """
-def undistort(img,cameraMatrix , distCoeff): # correct the image 
-    h,  w = img.shape[:2]
-
-    # we set alpha = 0 : reserve black pixels
-    newcameramtx, roi = cv2.getOptimalNewCameraMatrix(cameraMatrix, distCoeff, (w,h), 0, (w,h),centerPrincipalPoint=False)
-    print('\nK,new_K,roi:\n','K:',cameraMatrix,'\nnew K:',newcameramtx,'\nroi:',roi)
-
-    # undistort
-    mapx, mapy = cv2.initUndistortRectifyMap(cameraMatrix,  distCoeff, None, cameraMatrix, (w,h), 5)
-    dst = cv2.remap(img, mapx, mapy, cv2.INTER_LINEAR)
-    print(dst.shape)
-    cv2.imshow("img",cv2.resize(dst,(640,480)))
-    cv2.waitKey(0)  
-    cv2.imwrite('calibresult.png', dst)
+def undistort(img,cameraMatrix , distCoeff, mode = "normal"): # correct the image 
+    if mode == "normal":
+        h,  w = img.shape[:2]
+        # we set alpha = 0 : reserve black pixels
+        newcameramtx, roi = cv2.getOptimalNewCameraMatrix(cameraMatrix, distCoeff, (w,h), 0, (w,h),centerPrincipalPoint=False)
+        print('\nK,new_K,roi:\n','K:',cameraMatrix,'\nnew K:',newcameramtx,'\nroi:',roi)
+        # undistort
+        mapx, mapy = cv2.initUndistortRectifyMap(cameraMatrix,  distCoeff, None, cameraMatrix, (w,h), 5)
+        dst = cv2.remap(img, mapx, mapy, cv2.INTER_LINEAR)
+        print(dst.shape)
+        cv2.imshow("img",cv2.resize(dst,(640,480)))
+        cv2.waitKey(0)  
+        cv2.imwrite('calibresult.png', dst)
+    
+    else:
+        img_undistorted = cv2.fisheye.undistortImage(img, cameraMatrix, distCoeff)
+        cv2.imshow('Undistorted Image', img_undistorted)
+        cv2.waitKey(0)
 
 if __name__ == '__main__':
     print("please select the action...")
@@ -142,16 +142,23 @@ if __name__ == '__main__':
         board = Board(11,8,1) #col row width(mm)
         mode = input("choose your camera type: [1]normal [2]fisheye\n")
         if mode == '1':
-            cameraMatrix,distCoeff = Calibrate("caliImg",board,mode="normal",out_file="./configs/Intri.py")
+            cameraMatrix,distCoeff = Calibrate("caliImg",board,mode="normal",out_file="./configs/Intrinsic_normal.py")
         elif mode == '2':
-            cameraMatrix,distCoeff = Calibrate("caliImg",board,mode="fisheye",out_file="./configs/Intri.py")  
+            cameraMatrix,distCoeff = Calibrate("caliImg",board,mode="fisheye",out_file="./configs/Intri_fisheye.py")  
         else:
             print("error input.exit.")
 
     elif selec == '3':
         img = cv2.imread("./caliImg/0.png")
-        from configs.Intri import cameraMatrix,distCoeff
-        undistort(img,cameraMatrix,distCoeff)
+        mode = input("choose your camera type: [1]normal [2]fisheye\n")
+        if mode == '1':
+            from configs.Intrinsic_normal import cameraMatrix,distCoeff
+            undistort(img,cameraMatrix,distCoeff,mode = "normal")
+        elif mode == '2':
+            from configs.Intrinsic_fisheye import cameraMatrix,distCoeff
+            undistort(img,cameraMatrix,distCoeff,mode = "fisheye")
+        else:
+            print("error input.exit.")
 
     else:
         print("illegal input.exit.")
