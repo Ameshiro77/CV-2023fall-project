@@ -147,7 +147,7 @@ if __name__ == '__main__':
         Capture("./caliImg",5,cap)
     
     elif selec == '2':
-        board = Board(11,8,1) #col row width(mm)
+        board = Board(11,8,10) #col row width(mm)
         mode = input("choose your camera type: [1]normal [2]fisheye\n")
         if mode == '1':
             cameraMatrix,distCoeff = Calibrate("caliImg",board,mode="normal",out_file="./configs/Intrinsic_normal.py")
