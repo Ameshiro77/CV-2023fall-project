@@ -6,7 +6,7 @@ if __name__ == '__main__':
         success, frame = cap.read()
         if not success:
             break
-        frame = cv2.fisheye.undistortImage(frame, cameraMatrix, distCoeff)
+        # frame = cv2.fisheye.undistortImage(frame, cameraMatrix, distCoeff)
         cv2.imshow('camera',frame)
         key = cv2.waitKey(1) & 0xff
         if key == ord('q') or key == ord('Q'):

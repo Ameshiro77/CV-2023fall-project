@@ -1,3 +1,8 @@
+"""
+This .py is to compute H between two planes:image plane and ground plane
+(本程序实现：求解成像平面和大地平面的单应矩阵)
+"""
+
 import cv2
 from utils.calibrate import *
 from configs.Intrinsic_normal import cameraMatrix,distCoeff

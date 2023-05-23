@@ -1,3 +1,8 @@
+"""
+This .py is to get a birdeye with K,D and a plane image with a board
+(本程序使用内参和畸变系数，把一个带有标定板的平面的图像转换成鸟瞰图)
+"""
+
 from utils.calibrate import Board,normal_undistort
 import cv2
 import numpy as np

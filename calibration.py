@@ -19,12 +19,7 @@ def undistort(img,cameraMatrix , distCoeff, mode = "normal"): # correct the imag
         print("dst shape:",dst.shape)
         cv2.imshow("img",dst)
         cv2.waitKey(0)  
-<<<<<<< HEAD
     
-=======
-        cv2.imwrite('calibresult.png', dst)
- 
->>>>>>> 39504d9623c7ce63a2d4362ccc48dcefb686301c
     else:
         img_undistorted = cv2.fisheye.undistortImage(img, cameraMatrix, distCoeff)
         cv2.imshow('Undistorted Image', img_undistorted)
