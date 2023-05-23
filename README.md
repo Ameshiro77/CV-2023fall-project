@@ -11,10 +11,11 @@ git created on 2023/5/12
 ​		标定板相关请参考：[openCV踩坑汇总 | 雨白的博客小屋 (ameshiro77.cn)](https://www.ameshiro77.cn/posts/4e9580a4.html) 的目录2，**本程序使用的标定板是x方向奇数11个、y方向偶数8个、角点间距1cm的标定板**，在程序里为calibration.py的：
 
 ```python
-board = Board(11,8,1) #col row width(mm)
+board = Board(11,8,10) #col row width(mm)
 ```
 
 ​		如果您的标定板与之不同，请务必记得修改。
+<<<<<<< HEAD
 
 
 
@@ -23,3 +24,5 @@ board = Board(11,8,1) #col row width(mm)
 ​		把部分函数放入到了utils/calibrate下，供其他程序使用。**新增了鸟瞰图**，运行birdeye.py即可。
 
 ​		PS：鸟瞰图转换中，标定板平面坐标系的原点以左上角为基础，向左上平移了200mm。
+=======
+>>>>>>> 39504d9623c7ce63a2d4362ccc48dcefb686301c
