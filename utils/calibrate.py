@@ -98,3 +98,32 @@ def normal_undistort(img,cameraMatrix , distCoeff):
     mapx, mapy = cv2.initUndistortRectifyMap(cameraMatrix,  distCoeff, None, newcameramtx, (w,h), 5)
     dst = cv2.remap(img, mapx, mapy, cv2.INTER_LINEAR)
     return dst
+
+"""
+this function is to take photos to calibrate
+parameters:
+    folder: where the photos will be saved
+    num: how many photos will take
+return: none
+"""
+def Capture(folder:str,num: int, cap: cv2.VideoCapture,isUndistort=False,K=None,D=None) -> None:
+    count = 0   # nums of photos captured
+    while True:
+        success, frame = cap.read()
+        if not success or count >= num:
+            break
+
+        if isUndistort == True: 
+            frame = normal_undistort(frame,K,D)
+
+        cv2.imshow('press c to capture , q to exit..', frame)
+
+        key = cv2.waitKey(1) & 0xff
+        if key == ord('q') or key == ord('Q'):
+            break
+
+        elif key == ord('c'):
+            img_path = f'{folder}/{count}.png'  # save into the folder
+            cv2.imwrite(img_path, frame)
+            print(f'captured at {img_path}')
+            count += 1

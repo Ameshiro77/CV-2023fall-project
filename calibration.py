@@ -6,36 +6,9 @@ This .py is to do:
 """
 # ==========
 import cv2
-import numpy as np
-from utils.drawing import drawCorners
-from utils.opFile import writeIntriToFile,cleanFolder
-from utils.calibrate import normal_undistort,Board,Calibrate
+from utils.opFile import cleanFolder
+from utils.calibrate import normal_undistort,Board,Calibrate,Capture
 # ==========
-
-"""
-this function is to take photos to calibrate
-parameters:
-    folder: where the photos will be saved
-    num: how many photos will take
-return: none
-"""
-def Capture(folder:str,num: int, cap: cv2.VideoCapture) -> None:
-    count = 0   # nums of photos captured
-    while True:
-        success, frame = cap.read()
-        if not success or count >= num:
-            break
-        cv2.imshow('press c to capture , q to exit..', frame)
-
-        key = cv2.waitKey(1) & 0xff
-        if key == ord('q') or key == ord('Q'):
-            break
-
-        elif key == ord('c'):
-            img_path = f'{folder}/{count}.png'  # save into the folder
-            cv2.imwrite(img_path, frame)
-            print(f'captured at {img_path}')
-            count += 1
 
 """
 this function is to undistort
@@ -46,7 +19,6 @@ def undistort(img,cameraMatrix , distCoeff, mode = "normal"): # correct the imag
         print("dst shape:",dst.shape)
         cv2.imshow("img",dst)
         cv2.waitKey(0)  
-        cv2.imwrite('calibresult.png', dst)
     
     else:
         img_undistorted = cv2.fisheye.undistortImage(img, cameraMatrix, distCoeff)
