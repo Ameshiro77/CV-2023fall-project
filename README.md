@@ -50,7 +50,7 @@ board = Board(11,8,10) #col row width(mm)
 
 踩了以下坑，作个汇总。
 
-1.train.py的config我更改过。当使用预训练时，会报keyerror:"assets"的错误。取消预训练重头练即可，此时记得要指定cfg。原因不明(**据我观察，这多半是.pt文件路径不对或者别的问题，反正问题出在.pt上**)。
+1.train.py的config我更改过。之前当使用预训练时，会报keyerror:"assets"的错误。(**据我观察，这基本就是.pt文件路径不对的问题，请检查自己参数里的路径是否写对了**)。
 
 2.train.txt等等里面的路径最好还是写绝对路径，用os.getcwd和join拼接即可。
 
