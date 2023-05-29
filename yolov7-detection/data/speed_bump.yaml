@@ -1,0 +1,12 @@
+# train and val data as 1) directory: path/images/, 2) file: path/images.txt, or 3) list: [path1/images/, path2/images/]
+train: ./datasets/SpeedBumpDataset/train.txt
+val: ./datasets/SpeedBumpDataset/val.txt
+test: ./datasets/SpeedBumpDataset/test.txt
+
+# number of classes
+nc: 1
+depth_multiple: 1.0
+width_multiple: 1.0
+
+# class names
+names: [ 'bump' ]

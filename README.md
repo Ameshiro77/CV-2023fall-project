@@ -27,3 +27,31 @@ board = Board(11,8,10) #col row width(mm)
 2023/5/23 更新：
 
         下载了yolov7代码，能够检测视频中人物但是非常卡。
+
+
+
+# 二、单应矩阵标定
+
+
+
+# 三、目标检测
+
+2023/5/29更新：
+
+初步试了下用自己的数据集训练。建立了datasets文件夹，标注工具为labelimg。数据处理过程为：
+
+1.将要标注的图片放到data/images里。
+
+2.用labelimg标注，标注结果放到data/labels里。
+
+3.运行yolo文件夹下的data_process.py来划分数据，生成训练集等路径。参考博客：[Yolov7训练自己的数据集（超详细） - 玻璃公主 - 博客园 (cnblogs.com)](https://www.cnblogs.com/boligongzhu/p/16718242.html)
+
+**github不传图片，请自己拍摄**~
+
+踩了以下坑，作个汇总。
+
+1.train.py的config我更改过。当使用预训练时，会报keyerror:"assets"的错误。取消预训练重头练即可，此时记得要指定cfg。原因不明(**据我观察，这多半是.pt文件路径不对或者别的问题，反正问题出在.pt上**)。
+
+2.train.txt等等里面的路径最好还是写绝对路径，用os.getcwd和join拼接即可。
+
+3.如果要用cpu训练，把utils/loss.py里面的780多行那几个device gpu：0务必改成cpu：0.
