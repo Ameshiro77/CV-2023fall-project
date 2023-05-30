@@ -1,7 +1,7 @@
 import sys
 sys.path.append('../')  # 添加上级目录到sys.path中
 import numpy as np
-from configs.Intrinsic_fisheye import homographyMatrix
+from configs.homography import homographyMatrix
 class distance:
     def __init__(self) -> None:
         pass

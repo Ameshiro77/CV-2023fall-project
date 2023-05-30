@@ -8,6 +8,9 @@ from utils.calibrate import *
 from utils.capture import Capture
 from configs.Intrinsic_normal import cameraMatrix,distCoeff
 
+imgps = []
+objps = []
+
 # mouse callback function
 def click_corner(event, x, y, flags, param):
     if event == cv2.EVENT_LBUTTONDOWN:
@@ -15,7 +18,9 @@ def click_corner(event, x, y, flags, param):
         cv2.circle(img, (x, y), 1, (255, 0, 0), thickness = -1)
         cv2.putText(img, xy, (x, y), cv2.FONT_HERSHEY_PLAIN,
                     1.0, (0,0,0), thickness = 1)
+        imgps.append([x,y])
         print(x,y)
+        print(imgps)
         
 if __name__ == '__main__':
 
@@ -28,7 +33,7 @@ if __name__ == '__main__':
     # click the corner
     cv2.namedWindow("groundBoard")
     cv2.setMouseCallback("groundBoard",click_corner)
-  
+    
     while(1):
         cv2.imshow("groundBoard", img)
         key = cv2.waitKey(1) & 0xff

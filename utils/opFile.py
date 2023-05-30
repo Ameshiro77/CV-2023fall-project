@@ -1,13 +1,22 @@
 import os
 
 # to write K and D into configs folder
-def writeIntriToFile(file_path,cmx,dist):
+def writeIntriToFile(file_path, cmx, dist):
     with open(file_path, mode='w', encoding='utf-8') as f:
         f.write("import numpy as np\n")
-        
+
         f.write("cameraMatrix = np.float32("+str(cmx.tolist())+')')
 
         f.write("\ndistCoeff = np.float32("+str(dist.tolist())+')')
+
+    print(f"file has been written to : {file_path}.")
+
+# to write K and D into configs folder
+def writeHomographyToFile(file_path, homography):
+    with open(file_path, mode='w', encoding='utf-8') as f:
+        f.write("import numpy as np\n")
+
+        f.write("homographyMatrix = np.float32("+str(homography.tolist())+')')
 
     print(f"file has been written to : {file_path}.")
 
