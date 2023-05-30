@@ -48,10 +48,16 @@ board = Board(11,8,10) #col row width(mm)
 
 **github不传图片，请自己拍摄**~
 
-踩了以下坑，作个汇总。
+踩了以下坑，作个汇总以作为注意事项。
 
 1.train.py的config我更改过。之前当使用预训练时，会报keyerror:"assets"的错误。(**据我观察，这基本就是.pt文件路径不对的问题，请检查自己参数里的路径是否写对了**)。
 
 2.train.txt等等里面的路径最好还是写绝对路径，用os.getcwd和join拼接即可。
 
 3.如果要用cpu训练，把utils/loss.py里面的780多行那几个device gpu：0务必改成cpu：0.
+
+4.如果要使用预训练，请修改cfg/training/yolov7.yaml里的nc为对应数量。
+
+5.训练前**记得删除dataset文件夹里的cache**！
+
+6.yaml不要写汉语！！！会gbk错误

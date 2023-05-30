@@ -4,7 +4,7 @@ import shutil
 import random
 import os
 
-dataset_name = "SpeedBumpDataset"
+# dataset_name = "SpeedBumpDataset"
 dataset_name = "InstantNoodlesDataset"
 
 cur_path = os.getcwd()  # 用绝对路径好一些
@@ -38,9 +38,9 @@ list_train = os.path.join(cur_path, "datasets/"+dataset_name+"/train.txt")
 list_val = os.path.join(cur_path, "datasets/"+dataset_name+"/val.txt")
 list_test = os.path.join(cur_path, "datasets/"+dataset_name+"/test.txt")
 
-train_percent = 0.6
-val_percent = 0.2
-test_percent = 0.2
+train_percent = 0.8
+val_percent = 0.1
+test_percent = 0.1
 
 
 def del_file(path):
