@@ -1,0 +1,3 @@
+G:\Code_Project\CVproj\yolov7-detection\datasets/InstantNoodlesDataset/images/train/0.png
+G:\Code_Project\CVproj\yolov7-detection\datasets/InstantNoodlesDataset/images/train/1.png
+G:\Code_Project\CVproj\yolov7-detection\datasets/InstantNoodlesDataset/images/train/2.png

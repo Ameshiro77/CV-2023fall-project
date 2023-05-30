@@ -1,0 +1,1 @@
+G:\Code_Project\CVproj\yolov7-detection\datasets/InstantNoodlesDataset/images/val/3.png

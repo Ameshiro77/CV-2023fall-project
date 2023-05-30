@@ -1,5 +1,9 @@
+"""
+本程序用来录视频
+"""
+
 import cv2
-from utils.calibrate import Capture,normal_undistort
+from utils.calibrate import normal_undistort
 from configs.Intrinsic_normal import cameraMatrix , distCoeff
 import os
 import torch

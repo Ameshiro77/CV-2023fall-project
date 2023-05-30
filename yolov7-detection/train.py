@@ -530,7 +530,7 @@ if __name__ == '__main__':
     parser.add_argument('--cfg', type=str, default='cfg/training/yolov7.yaml', help='model.yaml path')
     parser.add_argument('--data', type=str, default='data/speed_bump.yaml', help='data.yaml path')
     parser.add_argument('--hyp', type=str, default='data/hyp.scratch.p5.yaml', help='hyperparameters path')
-    parser.add_argument('--epochs', type=int, default=5)
+    parser.add_argument('--epochs', type=int, default=20)
     parser.add_argument('--batch-size', type=int, default=1, help='total batch size for all GPUs')
     parser.add_argument('--img-size', nargs='+', type=int, default=[640, 640], help='[train, test] image sizes')
     parser.add_argument('--rect', action='store_true', help='rectangular training')

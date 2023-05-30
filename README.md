@@ -44,7 +44,7 @@ board = Board(11,8,10) #col row width(mm)
 
 2.用labelimg标注，标注结果放到data/labels里。
 
-3.运行yolo文件夹下的data_process.py来划分数据，生成训练集等路径。参考博客：[Yolov7训练自己的数据集（超详细） - 玻璃公主 - 博客园 (cnblogs.com)](https://www.cnblogs.com/boligongzhu/p/16718242.html)
+3.**进入yolo文件夹**（否则路径不对），运行yolo文件夹下的data_process.py来划分数据，生成训练集等路径。参考博客：[Yolov7训练自己的数据集（超详细） - 玻璃公主 - 博客园 (cnblogs.com)](https://www.cnblogs.com/boligongzhu/p/16718242.html)
 
 **github不传图片，请自己拍摄**~
 

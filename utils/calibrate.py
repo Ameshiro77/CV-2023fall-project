@@ -2,7 +2,6 @@
 import cv2
 import numpy as np
 import glob
-from utils.drawing import drawCorners
 from utils.opFile import writeIntriToFile,cleanFolder
 
 """
@@ -18,6 +17,14 @@ class Board:
         self.width = width # length(mm) between rows/cols in real world
         pass
 
+"""
+this function is to draw corners in an image with chessboard
+"""
+def drawCorners(img,w,h,corners):
+    cv2.drawChessboardCorners(img,(w,h),corners,True)
+    img = cv2.resize(img,(800,600))
+    cv2.imshow('corners',img)
+    cv2.waitKey(0)
 
 """
 this function is to calibrate
@@ -98,32 +105,3 @@ def normal_undistort(img,cameraMatrix , distCoeff):
     mapx, mapy = cv2.initUndistortRectifyMap(cameraMatrix,  distCoeff, None, newcameramtx, (w,h), 5)
     dst = cv2.remap(img, mapx, mapy, cv2.INTER_LINEAR)
     return dst
-
-"""
-this function is to take photos to calibrate
-parameters:
-    folder: where the photos will be saved
-    num: how many photos will take
-return: none
-"""
-def Capture(folder:str,num: int, cap: cv2.VideoCapture,isUndistort=False,K=None,D=None) -> None:
-    count = 0   # nums of photos captured
-    while True:
-        success, frame = cap.read()
-        if not success or count >= num:
-            break
-
-        if isUndistort == True: 
-            frame = normal_undistort(frame,K,D)
-
-        cv2.imshow('press c to capture , q to exit..', frame)
-
-        key = cv2.waitKey(1) & 0xff
-        if key == ord('q') or key == ord('Q'):
-            break
-
-        elif key == ord('c'):
-            img_path = f'{folder}/{count}.png'  # save into the folder
-            cv2.imwrite(img_path, frame)
-            print(f'captured at {img_path}')
-            count += 1

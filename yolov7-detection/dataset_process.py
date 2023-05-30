@@ -1,36 +1,42 @@
 # 将图片和标注数据按比例切分为 训练集和测试集
+# 请务必在yolo文件夹运行
 import shutil
 import random
 import os
 
-# 原始路径
-image_original_path = "./datasets/SpeedBumpDataset/data/images/"
-label_original_path = "./datasets/SpeedBumpDataset/data/labels/"
+dataset_name = "SpeedBumpDataset"
+dataset_name = "InstantNoodlesDataset"
 
 cur_path = os.getcwd()  # 用绝对路径好一些
 print(cur_path)
+# 原始路径
+image_original_path = os.path.join(
+    cur_path, "datasets/"+dataset_name+"/data/images/")
+label_original_path = os.path.join(
+    cur_path, "datasets/"+dataset_name+"/data/labels/")
+
 # 训练集路径
 train_image_path = os.path.join(
-    cur_path, "datasets/SpeedBumpDataset/images/train/")
+    cur_path, "datasets/"+dataset_name+"/images/train/")
 train_label_path = os.path.join(
-    cur_path, "datasets/SpeedBumpDataset/labels/train/")
+    cur_path, "datasets/"+dataset_name+"/labels/train/")
 
 # 验证集路径
 val_image_path = os.path.join(
-    cur_path, "datasets/SpeedBumpDataset/images/val/")
+    cur_path, "datasets/"+dataset_name+"/images/val/")
 val_label_path = os.path.join(
-    cur_path, "datasets/SpeedBumpDataset/labels/val/")
+    cur_path, "datasets/"+dataset_name+"/labels/val/")
 
 # 测试集路径
 test_image_path = os.path.join(
-    cur_path, "datasets/SpeedBumpDataset/images/test/")
+    cur_path, "datasets/"+dataset_name+"/images/test/")
 test_label_path = os.path.join(
-    cur_path, "datasets/SpeedBumpDataset/labels/test/")
+    cur_path, "datasets/"+dataset_name+"/labels/test/")
 
 # 数据集对应划分的txt,是运行之后生成的
-list_train = os.path.join(cur_path, "datasets/SpeedBumpDataset/train.txt")
-list_val = os.path.join(cur_path, "datasets/SpeedBumpDataset/val.txt")
-list_test = os.path.join(cur_path, "datasets/SpeedBumpDataset/test.txt")
+list_train = os.path.join(cur_path, "datasets/"+dataset_name+"/train.txt")
+list_val = os.path.join(cur_path, "datasets/"+dataset_name+"/val.txt")
+list_test = os.path.join(cur_path, "datasets/"+dataset_name+"/test.txt")
 
 train_percent = 0.6
 val_percent = 0.2
