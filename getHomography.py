@@ -12,6 +12,11 @@ from configs.Intrinsic_normal import cameraMatrix,distCoeff
 
 imgps = []
 objps = [[0,0],[100,100],[200,200],[300,300]]
+# 一段长320cm
+# 二段长320cm
+# 三段长261cm
+# 右宽 210cm
+# 左宽 200.2cm
 
 # mouse callback function
 def click_corner(event, x, y, flags, param):
@@ -30,9 +35,9 @@ def click_corner(event, x, y, flags, param):
 if __name__ == '__main__':
 
     # capture a image
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
 
-    # Capture("./groundImg",1,cap,True,cameraMatrix,distCoeff)
+    Capture("./groundImg",1,cap,True,cameraMatrix,distCoeff)
     img = cv2.imread("./groundImg/0.png")
     cv2.destroyAllWindows()
 
