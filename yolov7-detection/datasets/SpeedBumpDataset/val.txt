@@ -1,1 +1,11 @@
-G:\Code_Project\CVproj\yolov7-detection\datasets/SpeedBumpDataset/images/val/1.png
+G:\Code_Project\CVproj\yolov7-detection\datasets/SpeedBumpDataset/images/val/10.png
+G:\Code_Project\CVproj\yolov7-detection\datasets/SpeedBumpDataset/images/val/16.png
+G:\Code_Project\CVproj\yolov7-detection\datasets/SpeedBumpDataset/images/val/19.png
+G:\Code_Project\CVproj\yolov7-detection\datasets/SpeedBumpDataset/images/val/20.png
+G:\Code_Project\CVproj\yolov7-detection\datasets/SpeedBumpDataset/images/val/29.png
+G:\Code_Project\CVproj\yolov7-detection\datasets/SpeedBumpDataset/images/val/43.png
+G:\Code_Project\CVproj\yolov7-detection\datasets/SpeedBumpDataset/images/val/55.png
+G:\Code_Project\CVproj\yolov7-detection\datasets/SpeedBumpDataset/images/val/60.png
+G:\Code_Project\CVproj\yolov7-detection\datasets/SpeedBumpDataset/images/val/68.png
+G:\Code_Project\CVproj\yolov7-detection\datasets/SpeedBumpDataset/images/val/93.png
+G:\Code_Project\CVproj\yolov7-detection\datasets/SpeedBumpDataset/images/val/99.png

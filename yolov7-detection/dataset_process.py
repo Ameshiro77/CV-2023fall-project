@@ -4,8 +4,8 @@ import shutil
 import random
 import os
 
-# dataset_name = "SpeedBumpDataset"
-dataset_name = "InstantNoodlesDataset"
+dataset_name = "SpeedBumpDataset"
+#dataset_name = "InstantNoodlesDataset"
 
 cur_path = os.getcwd()  # 用绝对路径好一些
 print(cur_path)

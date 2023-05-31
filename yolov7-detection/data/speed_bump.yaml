@@ -4,9 +4,9 @@ val: ./datasets/SpeedBumpDataset/val.txt
 test: ./datasets/SpeedBumpDataset/test.txt
 
 # number of classes
-nc: 1
+nc: 2
 depth_multiple: 1.0
 width_multiple: 1.0
 
 # class names
-names: [ 'bump' ]
+names: [ 'bump', 'person' ]
