@@ -19,13 +19,13 @@ def click_corner(event, x, y, flags, param):
         cv2.putText(img, xy, (x, y), cv2.FONT_HERSHEY_PLAIN,
                     1.0, (0,0,0), thickness = 1)
         print(x,y)
-        dist = getDistance(x,y)
-        print("dist=",dist)
+        dist = round(getDistance(x,y),5)
+        print("dist=",dist,"m")
 
         
 if __name__ == '__main__':
 
-    img = cv2.imread("./groundImg/0.png")
+    img = cv2.imread("./groundImg/113.png")
     cv2.destroyAllWindows()
 
     # click the corner
