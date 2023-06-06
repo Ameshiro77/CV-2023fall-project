@@ -25,7 +25,7 @@ def click_corner(event, x, y, flags, param):
         
 if __name__ == '__main__':
 
-    img = cv2.imread("./groundImg/113.png")
+    img = cv2.imread("./groundImg/61.png")
     cv2.destroyAllWindows()
 
     # click the corner

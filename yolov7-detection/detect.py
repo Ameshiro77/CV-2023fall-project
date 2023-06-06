@@ -16,6 +16,15 @@ from utils.torch_utils import select_device, load_classifier, time_synchronized,
 
 torch.backends.cudnn.enabled = False
 
+# 将英文标签训练好的权重文件，转换为中文标签
+def en_to_ch(chinese_names, weights):
+    # 读取权重文件
+    weights_dict = torch.load(weights)
+    # 将原来的英文标签，替换为中文标签
+    weights_dict['model'].names = chinese_names
+    # 最后保存到原文件中
+    torch.save(weights_dict, weights)
+
 def detect(save_img=False):
     source, weights, view_img, save_txt, imgsz, trace = opt.source, opt.weights, opt.view_img, opt.save_txt, opt.img_size, not opt.no_trace
     save_img = not opt.nosave and not source.endswith('.txt')  # save inference images
@@ -127,7 +136,7 @@ def detect(save_img=False):
 
                     if save_img or view_img:  # Add bbox to image
                         label = f'{names[int(cls)]} {conf:.2f}'
-                        plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
+                        im0 = plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
 
             # Print time (inference + NMS)
             print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')
@@ -166,11 +175,12 @@ def detect(save_img=False):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weights', nargs='+', type=str, default='runs/train/exp6/weights/best.pt', help='model.pt path(s)')
-    parser.add_argument('--source', type=str, default='inference/bumps', help='source')  # file/folder, 0 for webcam  # bumps/noodles
+    parser.add_argument('--weights', nargs='+', type=str, default='runs/train/exp5/weights/zbest.pt', help='model.pt path(s)')
+                        # 'weights/noodles.pt' #runs/train/expx/weights/best.pt
+    parser.add_argument('--source', type=str, default='inference/testvideo.mp4', help='source')  # file/folder, 0 for webcam  # bumps/noodles
     parser.add_argument('--img-size', type=int, default=640, help='inference size (pixels)')
-    parser.add_argument('--conf-thres', type=float, default=0.25, help='object confidence threshold')
-    parser.add_argument('--iou-thres', type=float, default=0.45, help='IOU threshold for NMS')
+    parser.add_argument('--conf-thres', type=float, default=0.70, help='object confidence threshold')
+    parser.add_argument('--iou-thres', type=float, default=0.25, help='IOU threshold for NMS')
     parser.add_argument('--device', default='0', help='cuda device, i.e. 0 or 0,1,2,3 or cpu')
     parser.add_argument('--view-img', action='store_true', help='display results')
     parser.add_argument('--save-txt', action='store_true', help='save results to *.txt')

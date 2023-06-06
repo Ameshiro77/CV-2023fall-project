@@ -45,7 +45,7 @@ test_percent = 0.1
 
 def del_file(path):
     for i in os.listdir(path):
-        file_data = path + "\\" + i
+        file_data = path  + i
         os.remove(file_data)
 
 
