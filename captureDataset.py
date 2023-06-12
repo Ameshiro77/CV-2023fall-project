@@ -7,6 +7,6 @@ import cv2
 from configs.Intrinsic_normal import cameraMatrix, distCoeff
 from utils.capture import Capture
 if __name__ == '__main__':
-    cap = cv2.VideoCapture("video/result3.avi")
-    Capture("./yolov7-detection/datasets/SpeedBumpDataset/data/images",
+    cap = cv2.VideoCapture("video/test.avi")
+    Capture("./video",
             -1, cap, isUndistort=False, K=cameraMatrix, D=distCoeff, isPreClean=False)

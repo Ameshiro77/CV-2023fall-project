@@ -136,7 +136,7 @@ def detect(save_img=False):
 
                     if save_img or view_img:  # Add bbox to image
                         label = f'{names[int(cls)]} {conf:.2f}'
-                        im0 = plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
+                        plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
 
             # Print time (inference + NMS)
             print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')
@@ -175,11 +175,12 @@ def detect(save_img=False):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weights', nargs='+', type=str, default='runs/train/exp5/weights/zbest.pt', help='model.pt path(s)')
+    parser.add_argument('--weights', nargs='+', type=str, default='runs/new_best.pt', help='model.pt path(s)')
                         # 'weights/noodles.pt' #runs/train/expx/weights/best.pt
-    parser.add_argument('--source', type=str, default='inference/testvideo.mp4', help='source')  # file/folder, 0 for webcam  # bumps/noodles
+    parser.add_argument('--source', type=str, default='inference/test.avi', help='source')  # file/folder, 0 for webcam  # bumps/noodles
+                                                                                               # inference/result2.avi
     parser.add_argument('--img-size', type=int, default=640, help='inference size (pixels)')
-    parser.add_argument('--conf-thres', type=float, default=0.70, help='object confidence threshold')
+    parser.add_argument('--conf-thres', type=float, default=0.35, help='object confidence threshold')
     parser.add_argument('--iou-thres', type=float, default=0.25, help='IOU threshold for NMS')
     parser.add_argument('--device', default='0', help='cuda device, i.e. 0 or 0,1,2,3 or cpu')
     parser.add_argument('--view-img', action='store_true', help='display results')

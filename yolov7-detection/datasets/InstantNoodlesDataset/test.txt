@@ -1,7 +1,0 @@
-G:\Code_Project\CVproj\yolov7-detection\datasets/InstantNoodlesDataset/images/test/36.png
-G:\Code_Project\CVproj\yolov7-detection\datasets/InstantNoodlesDataset/images/test/42.png
-G:\Code_Project\CVproj\yolov7-detection\datasets/InstantNoodlesDataset/images/test/66.png
-G:\Code_Project\CVproj\yolov7-detection\datasets/InstantNoodlesDataset/images/test/71.png
-G:\Code_Project\CVproj\yolov7-detection\datasets/InstantNoodlesDataset/images/test/82.png
-G:\Code_Project\CVproj\yolov7-detection\datasets/InstantNoodlesDataset/images/test/85.png
-G:\Code_Project\CVproj\yolov7-detection\datasets/InstantNoodlesDataset/images/test/91.png

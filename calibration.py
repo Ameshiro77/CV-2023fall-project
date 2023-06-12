@@ -7,6 +7,7 @@ This .py is to do:
 """
 # ==========
 import cv2
+import numpy as np
 from utils.calibrate import normal_undistort, Board, Calibrate
 from utils.capture import Capture
 # ==========
@@ -24,8 +25,11 @@ def undistort(img, cameraMatrix, distCoeff, mode="normal"):  # correct the image
         cv2.waitKey(0)
 
     else:
-        img_undistorted = cv2.fisheye.undistortImage(
-            img, cameraMatrix, distCoeff)
+        map1, map2 = cv2.fisheye.initUndistortRectifyMap(
+            cameraMatrix,distCoeff, np.eye(3), cameraMatrix, (640,480), cv2.CV_16SC2)
+        img_undistorted = cv2.remap(img, map1, map2, interpolation=cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT)
+        # img_undistorted = cv2.fisheye.undistortImage(
+        #     img, img_undistorted,cameraMatrix, distCoeff,cameraMatrix,(640,480))
         cv2.imshow('Undistorted Image', img_undistorted)
         cv2.waitKey(0)
 
@@ -49,7 +53,7 @@ if __name__ == '__main__':
                 "caliImg", board, mode="normal", out_file="./configs/Intrinsic_normal.py")
         elif mode == '2':
             cameraMatrix, distCoeff = Calibrate(
-                "caliImg", board, mode="fisheye", out_file="./configs/Intri_fisheye.py")
+                "caliImg", board, mode="fisheye", out_file="./configs/Intrinsic_fisheye.py")
         else:
             print("error input.exit.")
 

@@ -76,6 +76,7 @@ def Calibrate(board_folder:str,board:Board,mode="normal",out_file:str="./configs
         rvecs = [np.zeros((1, 1, 3), dtype=np.float32) for i in range(len(imageSets))]
         tvecs = [np.zeros((1, 1, 3), dtype=np.float32) for i in range(len(imageSets))]
         ret, K, D, rvecs, tvecs = cv2.fisheye.calibrate(objPoints, imgPoints, (w,h), K, D, rvecs, tvecs,criteria=criteria)
+        writeIntriToFile(out_file,K,D)
         print("K:",K,"\ndistcoeff:",D)
         return K,D
 
