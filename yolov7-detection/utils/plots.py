@@ -56,35 +56,35 @@ def butter_lowpass_filtfilt(data, cutoff=1500, fs=50000, order=5):
 
 def plot_one_box(x, img, color=None, label=None, line_thickness=3):
     # Plots one bounding box on image img
-    tl = line_thickness or round(0.002 * (img.shape[0] + img.shape[1]) / 2) + 1  # line/font thickness
+    tl = (line_thickness or round(0.002 * (img.shape[0] + img.shape[1]) / 2)) + 1  # line/font thickness
     color = color or [random.randint(0, 255) for _ in range(3)]
     c1, c2 = (int(x[0]), int(x[1])), (int(x[2]), int(x[3]))
 
     # ====== 获得中心坐标，用于测距 , 必须要转化成int =====
     center_x = int (( int(x[0]) + int(x[2]) ) / 2) 
     center_y = int (( int(x[1]) + int(x[3]) ) / 2)
-    cv2.circle(img, (center_x, center_y), 5, (255, 0, 0), thickness = -1)
+    # cv2.circle(img, (center_x, center_y), 5, (255, 0, 0), thickness = -1)
     from utils.measureDistance import getDistance
     dist = round(getDistance(center_x,center_y),5)
 
     # ====== 算减速带黄色部分的占比 进一步检测 =======
     from utils.getPixelsPercent import getPixelsPercent
     percent = getPixelsPercent(img,c1,c2)
-    print(percent)
+    # print(percent)
 
     # ====== 如果判断占比不够 会用红色框框出来 够的话就是蓝色框 ========
-    if 0.9 >= percent > 0.2:
-            color_box = [125, 219, 60]
-    else:
-            color_box = [0, 0, 255]
-    cv2.rectangle(img, c1, c2, color_box, thickness=tl, lineType=cv2.LINE_AA)
+    # if 0.9 >= percent > 0.2:
+    #         color_box = [125, 219, 60]
+    # else:
+    #         color_box = [0, 0, 255]
+    cv2.rectangle(img, c1, c2, color, thickness=tl, lineType=cv2.LINE_AA)
 
     if label:
         tf = max(tl - 1, 1)  # font thickness
-        t_size = cv2.getTextSize(label+"dist:"+str(dist)+"m,", 0, fontScale=tl / 3, thickness=tf)[0]
-        c2 = c1[0] + t_size[0], c1[1] - t_size[1] - 3
+        t_size = cv2.getTextSize(label , 0, fontScale=tl / 3, thickness=tf)[0]
+        c2 = (c1[0] + t_size[0], c1[1] - t_size[1] - 3)
         cv2.rectangle(img, c1, c2, color, -1, cv2.LINE_AA)  # filled
-        cv2.putText(img, "dist:"+str(dist)+"m,"+label, (c1[0], c1[1] - 2), 0, (tl / 3), [225, 255, 255], thickness=tf, lineType=cv2.LINE_AA)
+        cv2.putText(img, label, (c1[0], c1[1] - 2), 0, (tl / 3), [225, 255, 255], thickness=tf, lineType=cv2.LINE_AA)
 
 
 def plot_one_box_PIL(box, img, color=None, label=None, line_thickness=None):
